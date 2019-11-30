@@ -18,7 +18,9 @@ Meteor.startup(() => {
       Meteor.settings.public.RICHER_CARD_COMMENT_EDITOR !== false;
     const text = `${existing ? `\n${subject}\n` : ''}${
       params.user
-    } ${TAPi18n.__(description, quoteParams, lan)}\n${params.url}`;
+    } ${TAPi18n.__(description, quoteParams, lan)}\n${
+      htmlEnabled ? `<a href="${params.url}">${params.url}</a>` : params.url
+    }`;
 
     user.addEmailBuffer(htmlEnabled ? text.replace(/\n/g, '<br/>') : text);
 
